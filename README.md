@@ -5,6 +5,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)](https://www.postgresql.org/)
 [![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-4.12-orange)](https://www.crummy.com/software/BeautifulSoup/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
+[![CI](https://github.com/krishbakriwala8/web-scraping-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/krishbakriwala8/web-scraping-pipeline/actions/workflows/ci.yml)
 
 An end-to-end, production-grade web scraping and batch data ingestion pipeline built with **BeautifulSoup**, **Scrapy**, **PostgreSQL**, and **APScheduler**. Supports 10+ configurable data sources with modular scraper architecture, ETL orchestration, schema validation, and automated scheduling.
 
