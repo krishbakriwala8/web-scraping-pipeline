@@ -1,0 +1,125 @@
+# config/sources.yaml
+# =====================
+# Data source registry for the scraping pipeline.
+# Each entry defines a scraping target: URL, type, selectors, and schedule.
+
+sources:
+
+  hacker_news:
+    name: "Hacker News"
+    url: "https://news.ycombinator.com/"
+    scraper_type: "bs4"
+    category: "tech_news"
+    interval_hours: 1
+    selectors:
+      items: "tr.athing"
+      title: "span.titleline > a"
+      url: "span.titleline > a"
+      score: "~ + tr .score"
+      author: "~ + tr .hnuser"
+
+  books_to_scrape:
+    name: "Books to Scrape"
+    url: "https://books.toscrape.com/catalogue/page-{page}.html"
+    scraper_type: "bs4"
+    category: "ecommerce"
+    interval_hours: 6
+    paginate: true
+    max_pages: 5
+    selectors:
+      items: "article.product_pod"
+      title: "h3 > a"
+      price: "p.price_color"
+      rating: "p.star-rating"
+      url: "h3 > a"
+
+  quotes_to_scrape:
+    name: "Quotes to Scrape"
+    url: "https://quotes.toscrape.com/page/{page}/"
+    scraper_type: "bs4"
+    category: "nlp_data"
+    interval_hours: 12
+    paginate: true
+    max_pages: 5
+    selectors:
+      items: "div.quote"
+      title: "span.text"
+      author: "small.author"
+      tags: "div.tags a.tag"
+
+  arxiv_cs:
+    name: "ArXiv CS Papers"
+    url: "https://arxiv.org/list/cs.AI/recent"
+    scraper_type: "bs4"
+    category: "research"
+    interval_hours: 12
+    selectors:
+      items: "li[id^='abs']"
+      title: "div.list-title"
+      author: "div.list-authors"
+      url: "a[title='Abstract']"
+
+  github_trending:
+    name: "GitHub Trending"
+    url: "https://github.com/trending/python?since=daily"
+    scraper_type: "bs4"
+    category: "developer"
+    interval_hours: 6
+    selectors:
+      items: "article.Box-row"
+      title: "h2.h3 a"
+      description: "p.col-9"
+      stars: "a[href$='/stargazers']"
+      author: "h2.h3 a"
+
+  python_insider:
+    name: "Python Insider Blog"
+    url: "https://blog.python.org/"
+    scraper_type: "bs4"
+    category: "tech_blog"
+    interval_hours: 12
+    selectors:
+      items: "div.date-outer"
+      title: "h3.post-title a"
+      author: "span.fn"
+      url: "h3.post-title a"
+
+  wikipedia_trending:
+    name: "Wikipedia Trending"
+    url: "https://en.wikipedia.org/wiki/Wikipedia:Top_25_Report"
+    scraper_type: "bs4"
+    category: "knowledge"
+    interval_hours: 24
+    selectors:
+      items: "table.wikitable tr"
+      title: "td:nth-of-type(2) a"
+      url: "td:nth-of-type(2) a"
+
+  toscrape_jobs:
+    name: "Toscrape Jobs (Scrapy)"
+    url: "https://quotes.toscrape.com/"
+    scraper_type: "scrapy"
+    category: "jobs"
+    interval_hours: 3
+    spider_class: "QuotesSpider"
+
+  countries_api:
+    name: "REST Countries"
+    url: "https://restcountries.com/v3.1/all?fields=name,capital,population,region,languages"
+    scraper_type: "api"
+    category: "geo_data"
+    interval_hours: 48
+
+  openlibrary:
+    name: "Open Library Subjects"
+    url: "https://openlibrary.org/subjects/science.json?limit=20"
+    scraper_type: "api"
+    category: "books"
+    interval_hours: 24
+
+  worldbank:
+    name: "World Bank GDP Data"
+    url: "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&per_page=50&mrv=1"
+    scraper_type: "api"
+    category: "economics"
+    interval_hours: 48
